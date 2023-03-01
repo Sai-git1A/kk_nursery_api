@@ -22,7 +22,14 @@ const carouselSchema = new schema({
   imageURL: String
 });
 
+const categorySchema = new schema({
+  id: Number,
+  imageURL: String,
+  title: String
+});
+
 const Carousel = mongoose.model('Carousel', carouselSchema, 'carousel');
+const Category = mongoose.model('Category', categorySchema, 'category');
 
 app.get('/', (req, res) => {
   res.send('Server running at port 5000...')
@@ -35,8 +42,18 @@ app.get('/carousel', (req, res) => {
     } else {
       res.send(data);
     }
-  })
-})
+  });
+});
+
+app.get('/category', (req, res) => {
+  Category.find({}, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res,send(data);
+    }
+  });
+});
 
 app.listen(process.env.PORT || 5000, (req, res) => {
   console.log('server listening on port 5000...');
