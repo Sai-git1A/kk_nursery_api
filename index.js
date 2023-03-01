@@ -9,7 +9,9 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+  origin: '*'
+}));
 
 mongoose.set('strictQuery', false);
 mongoose.connect(process.env.MONGOURL);
@@ -50,7 +52,7 @@ app.get('/category', (req, res) => {
     if (err) {
       res.send(err);
     } else {
-      res,send(data);
+      res.send(data);
     }
   });
 });
