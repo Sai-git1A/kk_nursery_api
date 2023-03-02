@@ -41,7 +41,7 @@ const popularIndoorSchema = new schema({
 
 const Carousel = mongoose.model('Carousel', carouselSchema, 'carousel');
 const Category = mongoose.model('Category', categorySchema, 'category');
-const PopularIndoor = mongoose.model('PopularIndoor',popularIndoorSchema, 'popular-indoor');
+const PopularIndoor = mongoose.model('PopularIndoor',popularIndoorSchema, 'popular-indoor-plants');
 
 app.get('/', (req, res) => {
   res.send('Server running at port 5000...')
