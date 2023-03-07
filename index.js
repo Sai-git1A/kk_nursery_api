@@ -78,9 +78,9 @@ app.get('/popular-indoor-plants', (req, res) => {
   });
 });
 
-app.get('/indoor-plants/:page', (req, res) => {
+app.get('/indoor-plants', (req, res) => {
   const page = parseInt(req.params.page);
-  IndoorPlants.find().skip(page*10).limit(10).exec((err, data) => {
+  IndoorPlants.find({}, (err, data) => {
     if (err) {
       res.send(err);
     } else {
