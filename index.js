@@ -43,6 +43,7 @@ const Carousel = mongoose.model('Carousel', carouselSchema, 'carousel');
 const Category = mongoose.model('Category', categorySchema, 'category');
 const PopularIndoor = mongoose.model('PopularIndoor',popularIndoorSchema, 'popular-indoor-plants');
 const IndoorPlants = mongoose.model('IndoorPlants', popularIndoorSchema, 'indoor-plants');
+const OutdoorPlants = mongoose.model('OutdoorPlants', popularIndoorSchema, 'outdoor-plants');
 
 app.get('/', (req, res) => {
   res.send('Server running at port 5000...')
@@ -81,6 +82,17 @@ app.get('/popular-indoor-plants', (req, res) => {
 app.get('/indoor-plants', (req, res) => {
   const page = parseInt(req.params.page);
   IndoorPlants.find({}, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(data);
+    }
+  });
+});
+
+app.get('/outdoor-plants', (req, res) => {
+  const page = parseInt(req.params.page);
+  OutdoorPlants.find({}, (err, data) => {
     if (err) {
       res.send(err);
     } else {
