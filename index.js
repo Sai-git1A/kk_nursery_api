@@ -44,6 +44,8 @@ const Category = mongoose.model('Category', categorySchema, 'category');
 const PopularIndoor = mongoose.model('PopularIndoor',popularIndoorSchema, 'popular-indoor-plants');
 const IndoorPlants = mongoose.model('IndoorPlants', popularIndoorSchema, 'indoor-plants');
 const OutdoorPlants = mongoose.model('OutdoorPlants', popularIndoorSchema, 'outdoor-plants');
+const PlantingPots = mongoose.model('PlantingPots', popularIndoorSchema, 'planting-pots');
+const FloweringPlants = mongoose.model('FloweringPlants', popularIndoorSchema, 'flowering-plants');
 
 app.get('/', (req, res) => {
   res.send('Server running at port 5000...')
@@ -80,7 +82,6 @@ app.get('/popular-indoor-plants', (req, res) => {
 });
 
 app.get('/indoor-plants', (req, res) => {
-  const page = parseInt(req.params.page);
   IndoorPlants.find({}, (err, data) => {
     if (err) {
       res.send(err);
@@ -91,8 +92,27 @@ app.get('/indoor-plants', (req, res) => {
 });
 
 app.get('/outdoor-plants', (req, res) => {
-  const page = parseInt(req.params.page);
   OutdoorPlants.find({}, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(data);
+    }
+  });
+});
+
+app.get('/planting-pots', (req, res) => {
+  PlantingPots.find({}, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(data);
+    }
+  });
+});
+
+app.get('/flowering-plants', (req, res) => {
+  FloweringPlants.find({}, (err, data) => {
     if (err) {
       res.send(err);
     } else {
