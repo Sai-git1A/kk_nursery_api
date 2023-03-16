@@ -39,6 +39,21 @@ const popularIndoorSchema = new schema({
   price: Number
 });
 
+const detailsSchema = new schema({
+  id: Number,
+  name: String,
+  scientificName: String,
+  specifications: Array,
+  watering: String,
+  temperature: String,
+  sunlight: String,
+  soil: String,
+  diseases: Array,
+  humidity: String,
+  fertilizing: String,
+  repoting: String
+});
+
 const Carousel = mongoose.model('Carousel', carouselSchema, 'carousel');
 const Category = mongoose.model('Category', categorySchema, 'category');
 const PopularIndoor = mongoose.model('PopularIndoor',popularIndoorSchema, 'popular-indoor-plants');
@@ -46,6 +61,7 @@ const IndoorPlants = mongoose.model('IndoorPlants', popularIndoorSchema, 'indoor
 const OutdoorPlants = mongoose.model('OutdoorPlants', popularIndoorSchema, 'outdoor-plants');
 const PlantingPots = mongoose.model('PlantingPots', popularIndoorSchema, 'planting-pots');
 const FloweringPlants = mongoose.model('FloweringPlants', popularIndoorSchema, 'flowering-plants');
+const Details = mongoose.model('Details', detailsSchema, 'details');
 
 app.get('/', (req, res) => {
   res.send('Server running at port 5000...')
@@ -113,6 +129,16 @@ app.get('/planting-pots', (req, res) => {
 
 app.get('/flowering-plants', (req, res) => {
   FloweringPlants.find({}, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(data);
+    }
+  });
+});
+
+app.get('/details/:name', (req, res) => {
+  Details.findOne({name: req.params.name}, (err, data) => {
     if (err) {
       res.send(err);
     } else {
