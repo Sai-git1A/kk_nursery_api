@@ -21,17 +21,6 @@ mongoose.connection.on('connected', () => {
   console.log('database connected');
 });
 
-const carouselSchema = new schema({
-  id: Number,
-  imageURL: String
-});
-
-const categorySchema = new schema({
-  id: Number,
-  imageURL: String,
-  title: String
-});
-
 const popularIndoorSchema = new schema({
   id: Number,
   imageURL: String,
@@ -54,8 +43,6 @@ const detailsSchema = new schema({
   repoting: String
 });
 
-const Carousel = mongoose.model('Carousel', carouselSchema, 'carousel');
-const Category = mongoose.model('Category', categorySchema, 'category');
 const PopularIndoor = mongoose.model('PopularIndoor',popularIndoorSchema, 'popular-indoor-plants');
 const IndoorPlants = mongoose.model('IndoorPlants', popularIndoorSchema, 'indoor-plants');
 const OutdoorPlants = mongoose.model('OutdoorPlants', popularIndoorSchema, 'outdoor-plants');
@@ -65,26 +52,6 @@ const Details = mongoose.model('Details', detailsSchema, 'details');
 
 app.get('/', (req, res) => {
   res.send('Server running at port 5000...')
-});
-
-app.get('/carousel', (req, res) => {
-  Carousel.find({}, (err, data) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(data);
-    }
-  });
-});
-
-app.get('/category', (req, res) => {
-  Category.find({}, (err, data) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(data);
-    }
-  });
 });
 
 app.get('/popular-indoor-plants', (req, res) => {
